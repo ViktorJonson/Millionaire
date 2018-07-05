@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+<title>Choose your player</title>
+<link rel="stylesheet" type="text/css" href="million.css" />
+<link rel="icon" type="image/png" href="thinking.png"/>
+</head>
+<style>
+a{text-decoration:none;}
+.playerBubble{
+	float:left;
+	color:white;
+	width:220px;
+	height:220px;
+	margin: 10px;
+	font-size: 32px;
+	border: 3px solid black;
+	transition: 0.4s border;
+	}
+	.playerBubble:hover{
+	color: orange;
+	border: 3px solid orange;
+	}
+.bubbleContainer{
+	margin:auto;
+	width: 1050px;
+	height: 600px;
+	}
+</style>
+
+<body>
+	<div id="header">Who wants to be retarded?<br>
+	</div>
+		
+	<div class="bubbleContainer">	
+		<a class="playerBubble" href="million.html" onclick="setSession('Pontus')" style="background:url('Profiles/Pontus.png') no-repeat;  background-size: cover;">Pontus</span></a>
+		<a class="playerBubble" href="million.html" onclick="setSession('Jonte')" style="background:url('Profiles/Jonte.png') no-repeat;  background-size: cover;">Jonte</a>
+		<a class="playerBubble" href="million.html" onclick="setSession('Simon')" style="background:url('Profiles/Simon.png') no-repeat;  background-size: cover;">Simon</a>
+		<a class="playerBubble" href="million.html" onclick="setSession('Maxén')" style="background:url('Profiles/Maxén.png') no-repeat;  background-size: cover;">Maxén</a>
+		<a class="playerBubble" href="million.html" onclick="setSession('PK')" style="background:url('Profiles/PK.png') no-repeat;  background-size: cover;">PK</a>
+		<a class="playerBubble" href="million.html" onclick="setSession('Hallengren')" style="background:url('Profiles/Hallengren.png') no-repeat;  background-size: cover;">Hallengren</a>
+		<a class="playerBubble" href="million.html" onclick="setSession('Erik')" style="background:url('Profiles/Erik.png') no-repeat;  background-size: cover;">Erik</a>
+		<a class="playerBubble" href="million.html" onclick="setSession('Jonson')" style="background:url('Profiles/Jonson.png') no-repeat;  background-size: cover;">Jonson</a>
+	</div>
+</body>	
+</html>
+
+<script>
+
+function setSession(name){
+	localStorage.setItem("selected", name);
+	document.getElementById('header').innerHTML = localStorage.getItem("selected");
+}
+
+</script>
