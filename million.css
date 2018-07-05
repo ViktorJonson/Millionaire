@@ -1,0 +1,201 @@
+body{
+	text-align:center;
+	font-family:Copperplate Gothic Bold;
+	font-weight: 800;
+	margin:0;
+	background-image: url('backdrop.png')
+}
+
+#header{
+	width:100vw;
+	padding-bottom:10px;
+	color:white;
+	font-size: 100px;
+	background-color: black;
+}
+#a1,#a2,#a3,#a4,#a5,#a6,#a7,#a8{
+	visibility:hidden;
+	display:inline-block;
+	transition: transform 1.6s linear;
+}
+#subhead{
+	font-size: 12px;
+	color: white;
+}
+
+#main{
+	position: absolute;
+	bottom: 0;
+	width: 100vw;
+	margin: auto;
+}
+#whoAsked{
+	position:absolute;
+	top:-47px;
+	left:160px;
+	padding:10px;
+	border-radius:10px 10px 0 0;
+	border: 3px solid white;
+	background-color:black;
+	color:white;
+	font-size: 16px;
+	z-index:10;
+}
+#whoAskedPic{
+	position:absolute;
+	top:-100px;
+	left:62px;
+	width:100px;
+	border-radius:10px 10px 0 0;
+	border: 3px solid white;
+	background-color:black;
+	color:white;
+	font-size: 16px;
+	z-index:11;
+}
+#shader{
+	position:absolute;
+	width:100vw;
+	height:100vh;
+	background-color:black;
+	opacity: 0;
+	z-index:100;
+	visibility:hidden;
+	transition: opacity 1s linear;
+}
+#penaltyDrink{
+	position:absolute;
+	color:white;
+	width:100vw;
+	font-size: 100px;
+	text-align:center;
+	color: orange;
+	z-index:102;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 1s linear;
+}
+.drinkPic{
+	width: 300px;
+	margin-top: 20px;
+	border: 3px solid white;
+}
+#itemContainer{	
+	position:absolute;
+	width:100vw;
+	height:90vh;
+	z-index:101;
+	visibility:hidden;
+	opacity: 0;
+	transition: opacity 1s linear;
+}
+.item {
+	margin: auto;
+	margin-top:100px;
+	width:220px;
+	height:220px;
+	background-color:black;
+	border: 10px solid grey;
+	border-radius:140px;
+    position: relative;
+	transition: all 1s linear;
+}
+
+#counter {
+	text-align:center;
+	color:white;
+	font-size:80px;
+	position: absolute;
+	left: 55px;
+	z-index:101;
+}
+
+svg {
+    transform: rotate(-90deg);
+}
+
+#circle {
+  stroke-dasharray: 628; /* this value is the pixel circumference of the circle */
+  stroke-dashoffset: 0;
+  transition: all 1s linear;
+}
+
+
+#question{
+	border: 5px solid white;
+	padding: 25px 5px;
+	width: 90vw;
+	margin: auto;
+	margin-bottom: 10px;
+	background-color: black;
+	color: white;
+	font-size: 30px;
+	border-radius: 70px/40px;
+	position:relative;
+}
+
+.alt{
+	border: 4px solid white;
+	padding: 15px 5px;
+	width: 40vw;
+	margin-top: 15px;
+	background-color: black;
+	color: white;
+	font-size: 35px;
+	border-radius: 70px/40px;
+	user-select: none;
+	cursor: pointer;
+}
+.altlet{margin:0;padding:0;color:orange;}
+#altA, #altC {
+	float: left;
+	margin-left: 6vw;
+}
+#altB, #altD {
+	float: right;
+	margin-right: 6vw;
+}
+#span0, #span1, #span2, #span3, #span4{
+	opacity:0;
+	transition: opacity 1s linear;
+}
+.helpCircle{
+	width:150px;
+	height: 150px;
+	background-color:black;
+	border: 3px solid white;
+	float: left;
+	border-radius:100px;
+	margin: 10px;
+	cursor: pointer;
+	position: relative;
+}
+.helpCircle:hover{
+	background-color: #333333;}
+.circleContainer{
+	margin: auto;
+	margin-top:210px;
+	width:528px;
+}
+.close {
+  position: absolute;
+  right: 42px;
+  top: -20px;
+  width: 50px;
+  height: 50px;
+  display:none;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 200px;
+  width: 8px;
+  background-color: red;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
