@@ -35,17 +35,23 @@
 	</div>
 	
 	<div id="main">
-		<div id="question">Fråga</div>
-		<div onclick="chooseAnswer('A')" id="altA" class="alt"><span id="span1"><span id="CaltA" class="altlet">A: </span>alternativ</span></div>
-		<div onclick="chooseAnswer('B')" id="altB" class="alt"><span id="span2"><span id="CaltB" class="altlet">B: </span>alternativ</span></div>
-		<div onclick="chooseAnswer('C')" id="altC" class="alt"><span id="span3"><span id="CaltC" class="altlet">C: </span>alternativ</span></div>
-		<div onclick="chooseAnswer('D')" id="altD" class="alt"><span id="span4"><span id="CaltD" class="altlet">D: </span>alternativ</span></div>
-		
-		<div class="circleContainer">
-			<div onclick="fiftyfifty()" id="fifty" class="helpCircle"><img style="margin-top:25px;" src="5050.png" ><span class="close"></span></div>
-			<div onclick="phoneAFriend()" id="phone" class="helpCircle"><img style="margin-top:25px;" src="phone.png" ><span class="close"></span></div>
-			<div onclick="audienceVote()" id="vote" class="helpCircle"><img style="margin-top:25px;" src="vote.png" ><span class="close"></span></div>
+	
+		<div id="questionContainer">
+			<div id="question">Fråga</div>
+			<div onclick="chooseAnswer('A')" id="altA" class="alt"><span id="span1"><span id="CaltA" class="altlet">A: </span>alternativ</span></div>
+			<div onclick="chooseAnswer('B')" id="altB" class="alt"><span id="span2"><span id="CaltB" class="altlet">B: </span>alternativ</span></div>
+			<div onclick="chooseAnswer('C')" id="altC" class="alt"><span id="span3"><span id="CaltC" class="altlet">C: </span>alternativ</span></div>
+			<div onclick="chooseAnswer('D')" id="altD" class="alt"><span id="span4"><span id="CaltD" class="altlet">D: </span>alternativ</span></div>
 		</div>
+			
+		<div class="circleContainer">
+			<div class="circleContainer2">
+				<div onclick="fiftyfifty()" id="fifty" class="helpCircle"><img style="margin-top:25px;" src="5050.png" ><span class="close"></span></div>
+				<div onclick="phoneAFriend()" id="phone" class="helpCircle"><img style="margin-top:25px;" src="phone.png" ><span class="close"></span></div>
+				<div onclick="audienceVote()" id="vote" class="helpCircle"><img style="margin-top:25px;" src="vote.png" ><span class="close"></span></div>
+			</div>
+		</div>
+		
 	</div>
 	
 </body>	
@@ -195,7 +201,7 @@ function changeColor(state, n){
 var audioLock = new Audio('lock.mp3'),
 	audioWrong = new Audio('wrong.mp3'),
 	audioCorrect = new Audio('correct.mp3'),
-	audioBg = new Audio('theme1.mp3'),
+	audioBg1 = new Audio('theme1.mp3'),
 	audioBg2 = new Audio('theme2.mp3'),
 	audioBg3 = new Audio('theme3.mp3'),
 	audioBg4 = new Audio('theme4.mp3'),
@@ -208,8 +214,8 @@ var audioLock = new Audio('lock.mp3'),
 	
 function playAudio(track){
 	if (track == 'bg'){
-		audioBg.currentTime = 0;
-		audioBg.play();
+		audioBg1.currentTime = 0;
+		audioBg1.play();
 	}
 	else if (track == 'jing'){
 		audioJingel.currentTime = 0;
@@ -222,7 +228,7 @@ function playAudio(track){
 		setTimeout(function() { playAudio('bg') }, 4000);
 	}
 	else if (track == 'lock'){
-		audioBg.pause();
+		audioBg1.pause();
 		audioLock.currentTime = 0;
 		audioLock.play();
 	}	
@@ -235,12 +241,12 @@ function playAudio(track){
 		audioWrong.play();
 	}
 	else if (track == 'phon'){
-		audioBg.pause();
+		audioBg1.pause();
 		audioPhone.currentTime = 11.9;
 		audioPhone.play();
 	}
 	else if (track == 'fin'){
-		audioBg.pause();
+		audioBg1.pause();
 		audioCorrect.pause();
 		audioWrong.pause();
 		audioFin.play();
@@ -343,7 +349,10 @@ function blink() {
 	}
 }
 
+function playBGAudio(){
 
+
+}
 writeQuestion(question[0]);
 playAudio('jing');
 </script>
