@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Vem vill bli efterbliven</title>
+<link rel="stylesheet" type="text/css" href="million.css" />
+<link rel="icon" type="image/png" href="thinking.png"/>
+</head>
+
+
+<body>
+	<a id="linkToStart" href="start.html" style="position:absolute; z-index: 110; right:0; bottom: 0; color:#222222; text-decoration:none;">Byt spelare</a>
+	<div id="shader"></div>
+	<div id="penaltyDrink">Hejhejehj</div>
+	<div id="itemContainer">
+		<div class="item">
+			<h2 id="counter">30</h2>
+			<svg width="240" height="240" xmlns="http://www.w3.org/2000/svg">
+			  <circle id="circle" r="100" cy="110" cx="130" stroke-width="20" stroke="orange" fill="black"/>
+			</svg>
+		</div>
+	</div>
+
+	<div id="header">
+		<span id="a1"></span>
+		<span id="a2">Who </span>
+		<span id="a3">wants </span>
+		<span id="a4">to </span>
+		<span id="a5">be </span>
+		<span id="a6">a </span>
+		<span id="a7">retard</span>
+		<span id="a8">?</span><br>
+		
+		<!-- <p id="subhead">ayylmao</p>-->
+	</div>
+	
+	<div id="main">
+		<div id="question">Fråga</div>
+		<div onclick="chooseAnswer('A')" id="altA" class="alt"><span id="span1"><span id="CaltA" class="altlet">A: </span>alternativ</span></div>
+		<div onclick="chooseAnswer('B')" id="altB" class="alt"><span id="span2"><span id="CaltB" class="altlet">B: </span>alternativ</span></div>
+		<div onclick="chooseAnswer('C')" id="altC" class="alt"><span id="span3"><span id="CaltC" class="altlet">C: </span>alternativ</span></div>
+		<div onclick="chooseAnswer('D')" id="altD" class="alt"><span id="span4"><span id="CaltD" class="altlet">D: </span>alternativ</span></div>
+		
+		<div class="circleContainer">
+			<div onclick="fiftyfifty()" id="fifty" class="helpCircle"><img style="margin-top:25px;" src="5050.png" ><span class="close"></span></div>
+			<div onclick="phoneAFriend()" id="phone" class="helpCircle"><img style="margin-top:25px;" src="phone.png" ><span class="close"></span></div>
+			<div onclick="audienceVote()" id="vote" class="helpCircle"><img style="margin-top:25px;" src="vote.png" ><span class="close"></span></div>
+		</div>
+	</div>
+	
+</body>	
+</html>
+
+<script src="questions.js"></script> 
+<script>
+var correctAnswer = "";
+var answerChoosen = false;
+var choosenAnswer = "";
+var Qnr = 0;
+var numberOfCorrectAnswers = 0;
+
+var lT = 1;
+var delayArray = [100, 800, 600, 400, 400, 500, 400, 400, 100]
+loadText();
+function loadText(){
+	if (lT < 9){
+		document.getElementById("a"+lT).style.visibility = "visible";
+		lT++;
+		setTimeout(loadText, delayArray[lT-1]);
+	}
+	else{
+		document.getElementById("a8").style.transform = "rotate(720deg)";
+	}
+}
+
+centerPenaltyDiv();
+function centerPenaltyDiv(){
+	var h = document.getElementById("header").offsetHeight;
+	var w = window.innerWidth; 
+	document.getElementById("penaltyDrink").style.top = h + "px";
+	
+	if (w < 1500)
+		document.getElementById("header").style.fontSize = "55px";
+}
+
+
+
+
+var fitfyState = true;
+function fiftyfifty() {
+	if (fitfyState && !answerChoosen && !goToNextQuestion && !showAlternatives){
+		document.getElementsByClassName("close")[0].style.display = "block";
+		var randomState = true,
+			rnd1, rnd2, CA;
+		
+		if (correctAnswer == "A"){CA = 1}
+		else if (correctAnswer == "B"){CA = 2}
+		else if (correctAnswer == "C"){CA = 3}
+		else if (correctAnswer == "D"){CA = 4}
+		
+		while (randomState){
+			rnd1 = Math.floor(Math.random()*4+1,1);
+			rnd2 = Math.floor(Math.random()*4+1,1);
+			
+			if (rnd1 != rnd2 && rnd1 != CA && rnd2 != CA){
+				document.getElementById("span"+rnd1).style.visibility = "hidden";
+				document.getElementById("span"+rnd2).style.visibility = "hidden";
+				randomState = false;
+				fiftyfifty = false;
+			}
+		}
+	}
+}
+
+var shaderOn = false;
+var phoneState = true;
+function phoneAFriend() {
+	if (phoneState && !answerChoosen && !goToNextQuestion && !showAlternatives){
+		document.getElementById('itemContainer').style.visibility = "visible";
+		document.getElementById('itemContainer').style.opacity = "1";
+		document.getElementById('shader').style.visibility = "visible";
+		document.getElementById('shader').style.opacity = "0.9";
+		shaderOn = true;
+	}
+}
+
+var time = 30,
+	t = 0;
+function Count() {
+	document.getElementById('counter').innerHTML = time-t;
+	t++; 
+	if (t<=time){
+		if (t>21)
+			document.getElementById('counter').style.left = "80px";
+		document.getElementById('circle').style.strokeDashoffset = -628*t/time;
+		setTimeout(Count, 1000);
+	}
+	else{
+		document.getElementById('circle').style.fill = "red";
+		document.getElementsByClassName('item')[0].style.backgroundColor = "red";
+	}
+}
+
+	
+function audienceVote() {
+	if (!answerChoosen && !goToNextQuestion && !showAlternatives)
+		document.getElementsByClassName("close")[2].style.display = "block";
+}
+
+var personWhoAsked = "";
+function writeQuestion(quest){
+	personWhoAsked = quest[6];
+	document.getElementById("question").innerHTML ='<div id="whoAsked">Fråga ställd av: <span style="color:orange;">' + personWhoAsked + '</span></div><img id="whoAskedPic" src="Profiles/' + personWhoAsked + '.png" /><span id="span0">' + quest[0] + '</span>';
+	document.getElementById("altA").innerHTML = '<span id="span1"><span id="CaltA" class="altlet">A: </span>' + quest[1] + '</span>';
+	document.getElementById("altB").innerHTML = '<span id="span2"><span id="CaltB" class="altlet">B: </span>' + quest[2] + '</span>';
+	document.getElementById("altC").innerHTML = '<span id="span3"><span id="CaltC" class="altlet">C: </span>' + quest[3] + '</span>';
+	document.getElementById("altD").innerHTML = '<span id="span4"><span id="CaltD" class="altlet">D: </span>' + quest[4] + '</span>';
+	correctAnswer = quest[5];
+}
+
+function nextQuestion(){
+	playAudio('next');
+	Qnr++;
+	writeQuestion(question[Qnr]);
+	showAlternatives = true;
+	answerChoosen = false;
+	blinkState = true;
+	i = 0;
+}
+
+function chooseAnswer(n){
+	if (!goToNextQuestion && !showAlternatives){
+		//document.getElementById('subhead').innerHTML = n;
+		playAudio('lock');
+		if (answerChoosen){
+			changeColor("", choosenAnswer);
+		}
+		changeColor("select", n);
+		answerChoosen = true;
+		choosenAnswer = n;
+	}
+}
+
+function changeColor(state, n){
+	var bgc,c1,c2;
+	if (state == "select"){bgc = "orange"; c1 = "black"; c2 = "white";}
+	else if (state == "green"){bgc = "SpringGreen"; c1 = "black"; c2 = "white";}
+	else {bgc = "black"; c1 = "white"; c2 = "orange";}
+	
+	document.getElementById("alt"+n).style.backgroundColor = bgc;
+	document.getElementById("alt"+n).style.color = c1;
+	document.getElementById("Calt"+n).style.color = c2;
+}
+
+var audioLock = new Audio('lock.mp3'),
+	audioWrong = new Audio('wrong.mp3'),
+	audioCorrect = new Audio('correct.mp3'),
+	audioBg = new Audio('theme1.mp3'),
+	audioBg2 = new Audio('theme2.mp3'),
+	audioBg3 = new Audio('theme3.mp3'),
+	audioBg4 = new Audio('theme4.mp3'),
+	audioBg5 = new Audio('theme5.mp3'),
+	audioBg6 = new Audio('theme.mp3'),
+	audioPhone = new Audio('phone.mp3'),
+	audioJingel = new Audio('jingel.mp3'),
+	audioNQ = new Audio('nextQuestion.mp3');
+	audioFin = new Audio('P4.mp3');
+	
+function playAudio(track){
+	if (track == 'bg'){
+		audioBg.currentTime = 0;
+		audioBg.play();
+	}
+	else if (track == 'jing'){
+		audioJingel.currentTime = 0;
+		audioJingel.play();
+		setTimeout(function() { playAudio('bg') }, 6000);
+	}
+	else if (track == 'next'){
+		audioNQ.currentTime = 0;
+		audioNQ.play();
+		setTimeout(function() { playAudio('bg') }, 4000);
+	}
+	else if (track == 'lock'){
+		audioBg.pause();
+		audioLock.currentTime = 0;
+		audioLock.play();
+	}	
+	else if (track == 'corr'){
+		audioLock.pause();
+		audioCorrect.play();
+	}
+	else if (track == 'wron'){
+		audioLock.pause();
+		audioWrong.play();
+	}
+	else if (track == 'phon'){
+		audioBg.pause();
+		audioPhone.currentTime = 11.9;
+		audioPhone.play();
+	}
+	else if (track == 'fin'){
+		audioBg.pause();
+		audioCorrect.pause();
+		audioWrong.pause();
+		audioFin.play();
+	}
+}
+	
+var goToNextQuestion = false,
+	showAlternatives = true,
+	nQ = 0;
+	
+var pState = true;
+function showPenalty(){
+	var vsb, opa1, opa2;
+	if (pState){vsb = "visible"; opa1 = "1"; opa2 = "0.9"; pState = false}
+	else {vsb = "hidden"; opa1 = "0"; opa2 = "0";pState = true}
+	document.getElementById('penaltyDrink').style.visibility = vsb;
+	document.getElementById('penaltyDrink').style.opacity = opa1;
+	document.getElementById('shader').style.visibility = vsb;
+	document.getElementById('shader').style.opacity = opa2;
+	
+}
+var gameFinished = false;
+window.onkeyup = function(e) {
+	//document.getElementById("subhead").innerHTML = e.keyCode;
+	if (e.keyCode == 32 && answerChoosen == true && !gameFinished){ // space
+		if (goToNextQuestion){
+			showPenalty();
+			changeColor("", correctAnswer);
+			changeColor("", choosenAnswer);
+			goToNextQuestion = false;
+			if (Qnr < question.length-1)
+				nextQuestion();
+			else{
+				var procent = numberOfCorrectAnswers/question.length*100;
+				document.getElementById('penaltyDrink').innerHTML = "Spelet slut!<br><span style='font-size:50px; color:white; font-weight:100; font-family:arial;'>" + numberOfCorrectAnswers + " av " + question.length + " rätt! <br>(" + procent + "%)</span>";
+				showPenalty();
+				gameFinished = true;
+				playAudio("fin");
+			}
+		}
+		
+		else{	
+			if (choosenAnswer == correctAnswer){
+				document.getElementById('penaltyDrink').innerHTML = personWhoAsked + " dricker!<br>" + '<img class="drinkPic" src="Profiles/' + personWhoAsked + '.png" />';
+				playAudio('corr');
+				numberOfCorrectAnswers++;
+			}
+			else{
+				document.getElementById('penaltyDrink').innerHTML = player + " dricker!<br>" + '<img class="drinkPic" src="Profiles/' + player + '.png" />';
+				playAudio('wron');
+			}
+			setTimeout(showPenalty, 2000);
+			blink();
+			goToNextQuestion = true;
+		}
+	}
+	
+	else if (e.keyCode == 83 && phoneState && !answerChoosen && shaderOn){ // S
+		document.getElementsByClassName("close")[1].style.display = "block";
+		phoneState = false;
+		playAudio('phon');
+		Count();
+	}
+		
+	else if (e.keyCode == 27){ // esc
+		document.getElementById('itemContainer').style.visibility = "hidden";
+		document.getElementById('itemContainer').style.opacity = "0";
+		document.getElementById('shader').style.visibility = "hidden";
+		document.getElementById('shader').style.opacity = "0";
+		playAudio('bg');
+		shaderOn = false;
+	}
+	
+	else if (e.keyCode == 39 && showAlternatives){ // rightarrow
+		document.getElementById('span'+nQ).style.opacity = "1";
+		nQ++;
+		if (nQ == 5){
+			nQ = 0;
+			showAlternatives = false;
+		}
+	}
+}
+
+var i = 0, blinkState = true;
+function blink() {
+	if (blinkState){
+		changeColor("green", correctAnswer);
+		blinkState = false;
+	}
+	else {
+		if (choosenAnswer == correctAnswer)
+			changeColor("select", correctAnswer);
+		else 
+			changeColor("", correctAnswer);
+		blinkState = true;
+		}
+	i++;
+	if (i<9){
+		setTimeout(blink, 100);
+	}
+}
+
+
+writeQuestion(question[0]);
+playAudio('jing');
+</script>
+
+
+<!--- http://www.soundboard.com/sb/onemilliondollars -->
